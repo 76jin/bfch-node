@@ -1,0 +1,14 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "bearing fruit church homepage",
+  "main": "bfch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kjlee",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
