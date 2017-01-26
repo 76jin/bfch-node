@@ -1,55 +1,41 @@
+/*jshint unused:true */
+/*jshint undef:true */
+
 var express = require('express');
+var handlebars = require('express-handlebars').create({defaultLayout: 'main'});
 
 var app = express();
+
+// 포트 설정
 app.set('port', process.env.PORT || 3000);
+
+// 핸들바 뷰 엔진 설정
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
 
 app.get('/', function (req, res) {
     'use strict';
-    res.type('text/plain');
-    res.send('bfch homepage');
+    res.render('home');
 });
-
-// test start
-app.get('/about/contact', function (req, res) {
-    'use strict';
-    res.type('text/plain');
-    res.send('About/contact');
-});
-
-app.get('/about/directions', function (req, res) {
-    'use strict';
-    res.type('text/plain');
-    res.send('About/directions');
-});
-
-app.get('/about*', function (req, res) {
-    'use strict';
-    res.type('text/plain');
-    res.send('About*');
-});
-// test end
 
 app.get('/about', function (req, res) {
     'use strict';
-    res.type('text/plain');
-    res.send('About bfch homepage');
+    res.render('about');
 });
 
 // 커스텀 404 페이지
-app.use(function (req, res) {
+app.use(function (req, res, next) {
     'use strict';
-    res.type('text/plain');
     res.status(404);
-    res.send('404 - Not Found');
+    res.render('404');
 });
 
 // 커스텀 500 페이지
 app.use(function (err, req, res, next) {
     'use strict';
     console.error(err.stack);
-    res.type('text/plain');
     res.status(500);
-    res.send('500 - Server Error');
+    res.render('500');
 });
 
 app.listen(app.get('port'), function () {
